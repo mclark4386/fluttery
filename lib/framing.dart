@@ -27,9 +27,9 @@ class RandomColor {
 /// full reload or a full rebuild.
 class RandomColorBlock extends StatefulWidget {
 
-  final double width;
-  final double height;
-  final Widget child;
+  final double? width;
+  final double? height;
+  final Widget? child;
 
   RandomColorBlock({this.width, this.height, this.child});
 
@@ -40,7 +40,7 @@ class RandomColorBlock extends StatefulWidget {
 class _RandomColorBlockState extends State<RandomColorBlock> {
 
   /// Random color that persists across hot reload.
-  Color randomColor;
+  late Color randomColor;
 
   @override
   void initState() {

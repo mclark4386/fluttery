@@ -24,10 +24,10 @@ import 'package:meta/meta.dart';
 class AnimationPlayer extends StatefulWidget {
 
   final PlayableAnimation playableAnimation;
-  final PhaseController phaseController;
+  final PhaseController? phaseController;
 
   AnimationPlayer({
-    @required this.playableAnimation,
+    required this.playableAnimation,
     this.phaseController,
   }) {
     assert(playableAnimation != null);
@@ -41,14 +41,14 @@ class _MultiPhaseAnimationTesterState extends State<AnimationPlayer> with Ticker
 
   static const STANDARD_PHASE_TIME = 250;
 
-  PhaseController phaseController;
+  late PhaseController phaseController;
   double playbackSpeed = 1.0;
-  AnimationController animationController;
-
+  late AnimationController animationController;
+  
   @override
   void initState() {
     super.initState();
-
+    
     phaseController = widget.phaseController ?? new PhaseController();
 
     animationController = new AnimationController(
@@ -261,7 +261,7 @@ class PlayableAnimation {
   final List<Phase> phases;
 
   PlayableAnimation({
-    @required this.phases,
+    required this.phases,
   });
 }
 
@@ -357,7 +357,7 @@ class PhaseController extends ChangeNotifier {
     return activePhase + progressVector;
   }
 
-  update({int activePhase, double phaseProgress, playingForward}) {
+  update({int? activePhase, double? phaseProgress, playingForward}) {
     final newActivePhase = activePhase ?? _activePhase;
     final newPhaseProgress = phaseProgress ?? _phaseProgress;
     final newPlayingForward = playingForward ?? _playingForward;
@@ -376,9 +376,9 @@ class PhaseController extends ChangeNotifier {
 /// A [Phase] can be created with a single uniform [Transition] or with a
 /// forward and reverse [Transition] for bidirectional control.
 class Phase<DataType, ViewModelType> {
-  final Transition _uniformTransition;
-  final Transition _forward;
-  final Transition _reverse;
+  final Transition? _uniformTransition;
+  final Transition? _forward;
+  final Transition? _reverse;
 
   // A phase that uses the same Transition to go forward and back. A uniform
   // Transition is passed values starting at 0.0 -> 1.0 going forward, and then
