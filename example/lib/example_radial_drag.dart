@@ -8,7 +8,7 @@ class RadialDragExampleScreen extends StatefulWidget {
 
 class _RadialDragExampleState extends State<RadialDragExampleScreen> {
   bool isDragging = false;
-  PolarCoord lastDragCoord;
+  PolarCoord? lastDragCoord;
 
   _onRadialDragStart(coord) {
     print('The user has started dragging radially at: $coord');
