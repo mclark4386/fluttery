@@ -83,7 +83,7 @@ class PolarCoord {
     // Subtract the origin from the point to get the vector from the origin
     // to the point.
     final vectorPoint = point - origin;
-    final vector = new Offset(vectorPoint.x, vectorPoint.y);
+    final vector = new Offset(vectorPoint.x.toDouble(), vectorPoint.y.toDouble());
 
     // The polar coordinate is the angle the vector forms with the x-axis, and
     // the distance of the vector.
