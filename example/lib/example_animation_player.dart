@@ -3,18 +3,17 @@ import 'package:fluttery_dart2/animations.dart';
 
 class AnimationPlayerExampleScreen extends StatefulWidget {
   @override
-  _AnimationPlayerExampleState createState() => new _AnimationPlayerExampleState();
+  _AnimationPlayerExampleState createState() =>
+      new _AnimationPlayerExampleState();
 }
 
 class _AnimationPlayerExampleState extends State<AnimationPlayerExampleScreen> {
-
-
   double _currentPhasePosition = 0.0;
 
-  PlayableAnimation _playableAnimation;
+  late PlayableAnimation _playableAnimation;
   // A PhaseController is only necessary if the animation that you're
   // controlling also responds to user input or some other outside force.
-  PhaseController _phaseController;
+  late PhaseController _phaseController;
 
   @override
   void initState() {
@@ -25,20 +24,15 @@ class _AnimationPlayerExampleState extends State<AnimationPlayerExampleScreen> {
     // AnimationPlayer.
     _playableAnimation = new PlayableAnimation(
       phases: [
-        new Phase.uniform(
-            uniformTransition: (newAnimationPercent) {
-              setState(() => _currentPhasePosition = newAnimationPercent);
-            }
-        ),
-        new Phase.bidirectional(
-            forward: (forwardPercent) {
-              setState(() => _currentPhasePosition = 1.0 + forwardPercent);
-            },
-            reverse: (reversePercent) {
-              double uniformPercent = 1.0 - reversePercent;
-              setState(() => _currentPhasePosition = 1.0 + uniformPercent);
-            }
-        ),
+        new Phase.uniform(uniformTransition: (newAnimationPercent) {
+          setState(() => _currentPhasePosition = newAnimationPercent);
+        }),
+        new Phase.bidirectional(forward: (forwardPercent) {
+          setState(() => _currentPhasePosition = 1.0 + forwardPercent);
+        }, reverse: (reversePercent) {
+          double uniformPercent = 1.0 - reversePercent;
+          setState(() => _currentPhasePosition = 1.0 + uniformPercent);
+        }),
         new Phase.uniform(
           uniformTransition: (newAnimationPercent) {
             setState(() => _currentPhasePosition = 2.0 + newAnimationPercent);
@@ -47,9 +41,8 @@ class _AnimationPlayerExampleState extends State<AnimationPlayerExampleScreen> {
       ],
     );
 
-    _phaseController = new PhaseController(
-        phaseCount: _playableAnimation.phases.length
-    );
+    _phaseController =
+        new PhaseController(phaseCount: _playableAnimation.phases.length);
   }
 
   // Increments or decrements the active phase when the user taps. This is
@@ -62,15 +55,15 @@ class _AnimationPlayerExampleState extends State<AnimationPlayerExampleScreen> {
     if (_phaseController.playingForward) {
       _phaseController.nextPhase();
 
-      if (prevActivePhase == _phaseController.activePhase
-          && prevPhaseProgress == _phaseController.phaseProgress) {
+      if (prevActivePhase == _phaseController.activePhase &&
+          prevPhaseProgress == _phaseController.phaseProgress) {
         _phaseController.prevPhase();
       }
     } else {
       _phaseController.prevPhase();
 
-      if (prevActivePhase == _phaseController.activePhase
-          && prevPhaseProgress == _phaseController.phaseProgress) {
+      if (prevActivePhase == _phaseController.activePhase &&
+          prevPhaseProgress == _phaseController.phaseProgress) {
         _phaseController.nextPhase();
       }
     }
@@ -81,18 +74,17 @@ class _AnimationPlayerExampleState extends State<AnimationPlayerExampleScreen> {
     return new Stack(
       children: [
         new Center(
-          child: new InkWell(
-            onTap: _changePercentDueToUserTap,
-            child: new Text(
-              '${_currentPhasePosition.toStringAsFixed(2)}',
-              textAlign: TextAlign.center,
-              style: new TextStyle(
-                fontSize: 150.0,
-                color: Colors.black,
-              ),
+            child: new InkWell(
+          onTap: _changePercentDueToUserTap,
+          child: new Text(
+            '${_currentPhasePosition.toStringAsFixed(2)}',
+            textAlign: TextAlign.center,
+            style: new TextStyle(
+              fontSize: 150.0,
+              color: Colors.black,
             ),
-          )
-        ),
+          ),
+        )),
         new Column(
           children: [
             new Padding(
@@ -105,9 +97,7 @@ class _AnimationPlayerExampleState extends State<AnimationPlayerExampleScreen> {
                 ),
               ),
             ),
-
             new Expanded(child: new Container()),
-
             new AnimationPlayer(
               playableAnimation: _playableAnimation,
               phaseController: _phaseController,

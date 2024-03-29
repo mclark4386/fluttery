@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class DirectoryScreen extends StatelessWidget {
-
   static final examples = [
     {
       'title': 'Random Color Block',
@@ -23,16 +22,13 @@ class DirectoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final listItems = examples.map((example) {
       return new Padding(
         padding: const EdgeInsets.all(8.0),
-        child: new RaisedButton(
-          child: new Text(
-            '${example["title"]}'
-          ),
+        child: new ElevatedButton(
+          child: new Text('${example["title"]}'),
           onPressed: () {
-            Navigator.of(context).pushNamed(example['route']);
+            Navigator.of(context).pushNamed(example['route']!);
           },
         ),
       );
