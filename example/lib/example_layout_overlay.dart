@@ -61,8 +61,8 @@ class _LayoutOverlayExampleScreenState
         // Show overlay button.
         new Expanded(
           child: new Center(
-            child: new RaisedButton(
-              child: new Text('Show Overlay'),
+            child: ElevatedButton(
+              child: Text('Show Overlay'),
               onPressed: showOverlay,
             ),
           ),
@@ -94,8 +94,8 @@ class _LayoutOverlayExampleScreenState
         // Hide overlay button.
         new Expanded(
           child: new Center(
-            child: new RaisedButton(
-              child: new Text('Hide Overlay'),
+            child: ElevatedButton(
+              child: Text('Hide Overlay'),
               onPressed: hideOverlay,
             ),
           ),
